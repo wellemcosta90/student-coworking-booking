@@ -1,24 +1,35 @@
 <?php
+// connect to database
 include '../config/db.php';
 
+// message variable
 $message = "";
 
+// check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // get form data
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
     $role = "attendee";
 
+    // validation
     if (empty($name) || empty($email) || empty($password)) {
         $message = "All fields are required.";
+
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = "Invalid email format.";
+
     } elseif (strlen($password) < 6) {
         $message = "Password must be at least 6 characters.";
+
     } else {
+
+        // hash password before saving
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+        // insert user into database
         $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $name, $email, $hashed_password, $role);
 
@@ -53,3 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <button type="submit">Register</button>
 </form>
+
+<br>
+<a href="login.php">Already have an account? Login</a>

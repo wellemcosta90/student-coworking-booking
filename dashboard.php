@@ -1,9 +1,8 @@
 <?php
-// start session to access user data
+// start session
 session_start();
 
 // check if user is logged in
-// if not, send back to login page
 if (!isset($_SESSION['user_id'])) {
     header("Location: auth/login.php");
     exit();
@@ -12,8 +11,13 @@ if (!isset($_SESSION['user_id'])) {
 
 <h2>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
 
-<!-- show user role -->
 <p>Your role is: <?php echo htmlspecialchars($_SESSION['role']); ?></p>
 
-<!-- logout button -->
+<hr>
+
+<h3>Menu</h3>
+
+<a href="rooms/rooms.php">View Rooms</a><br>
+<a href="rooms/add_room.php">Add Room</a><br>
+<a href="bookings/my_bookings.php">My Bookings</a><br>
 <a href="auth/logout.php">Logout</a>

@@ -1,4 +1,7 @@
 <?php
+// protect page
+include '../includes/auth.php';
+
 // connect to database
 include '../config/db.php';
 

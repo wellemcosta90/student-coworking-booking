@@ -50,6 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($booking_date < date("Y-m-d")) {
         $message = "Booking date cannot be in the past.";
 
+    // check opening hours
+    } elseif ($start_time < "08:00:00" || $end_time > "20:00:00") {
+        $message = "Bookings are only allowed between 08:00 and 20:00.";
+
+    // check full-hour slots
+    } elseif (substr($start_time, 3, 2) != "00" || substr($end_time, 3, 2) != "00") {
+        $message = "Bookings must be made in full-hour slots.";
+
     // check if end time is after start time
     } elseif ($end_time <= $start_time) {
         $message = "End time must be after start time.";
@@ -70,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $conflict_result = $stmt->get_result();
 
-        // if conflict exists, do not create booking
         if ($conflict_result->num_rows > 0) {
             $message = "This room is already booked at this time.";
         } else {
@@ -111,10 +118,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="date" name="booking_date" required><br><br>
 
     Start Time:
-    <input type="time" name="start_time" required><br><br>
+    <select name="start_time" required>
+        <option value="">Select start time</option>
+        <?php for ($hour = 8; $hour <= 19; $hour++) { 
+            $time = sprintf("%02d:00:00", $hour);
+            $label = sprintf("%02d:00", $hour);
+        ?>
+            <option value="<?php echo $time; ?>"><?php echo $label; ?></option>
+        <?php } ?>
+    </select><br><br>
 
     End Time:
-    <input type="time" name="end_time" required><br><br>
+    <select name="end_time" required>
+        <option value="">Select end time</option>
+        <?php for ($hour = 9; $hour <= 20; $hour++) { 
+            $time = sprintf("%02d:00:00", $hour);
+            $label = sprintf("%02d:00", $hour);
+        ?>
+            <option value="<?php echo $time; ?>"><?php echo $label; ?></option>
+        <?php } ?>
+    </select><br><br>
 
     Purpose:
     <select name="booking_purpose" required>

@@ -2,13 +2,13 @@
 // start session
 session_start();
 
-// remove all session data
+// remove session data
 session_unset();
 
-// destroy session completely
+// destroy session
 session_destroy();
 
-// redirect back to login page
+// redirect to login
 header("Location: login.php");
 exit();
 ?>

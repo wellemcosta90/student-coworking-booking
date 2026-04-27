@@ -24,7 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Invalid email format.";
 
     } else {
-        // prepare SQL to find user by email (more secure)
+
+        // prepare SQL to find user by email
         $stmt = $conn->prepare("SELECT user_id, name, email, password, role FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -36,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
 
-            // verify password with hashed password in database
+            // verify password with hashed password
             if (password_verify($password, $user['password'])) {
 
                 // save user info in session
@@ -44,17 +45,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['role'] = $user['role'];
 
-                // redirect to dashboard after login
+                // redirect to dashboard
                 header("Location: ../dashboard.php");
                 exit();
 
             } else {
-                // wrong password
                 $message = "Incorrect password.";
             }
 
         } else {
-            // email not found
             $message = "No account found with this email.";
         }
     }
@@ -63,12 +62,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <h2>Login</h2>
 
-<!-- show error message if exists -->
 <?php if (!empty($message)) { ?>
     <p><?php echo htmlspecialchars($message); ?></p>
 <?php } ?>
 
-<!-- login form -->
 <form method="POST">
     Email:
     <input type="email" name="email" required><br><br>
@@ -78,3 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <button type="submit">Login</button>
 </form>
+
+<br>
+<a href="register.php">Create account</a>

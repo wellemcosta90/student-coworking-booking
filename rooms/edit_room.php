@@ -1,4 +1,7 @@
 <?php
+// protect page
+include '../includes/auth.php';
+
 // connect to database
 include '../config/db.php';
 
@@ -45,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($room_name) || empty($room_type) || empty($status)) {
         $message = "All fields are required.";
 
-    // check meeting capacity range
     } elseif ($room_type == "meeting" && ($capacity < 2 || $capacity > 15)) {
         $message = "Meeting room capacity must be between 2 and 15 people.";
 
@@ -98,7 +100,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </option>
     </select><br><br>
 
-    <!-- capacity field only visible for meeting rooms -->
     <div id="capacity_field">
         Capacity:
         <select name="capacity" id="capacity">
@@ -128,12 +129,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <a href="rooms.php">Back to Rooms</a>
 
 <script>
-// function to show/hide capacity based on room type
+// show or hide capacity field
 function toggleCapacity() {
     const roomType = document.getElementById("room_type").value;
     const capacityField = document.getElementById("capacity_field");
 
-    // if individual, hide capacity
     if (roomType === "individual") {
         capacityField.style.display = "none";
     } else {
@@ -141,6 +141,6 @@ function toggleCapacity() {
     }
 }
 
-// run on page load
+// run when page loads
 toggleCapacity();
 </script>

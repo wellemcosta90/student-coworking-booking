@@ -1,4 +1,7 @@
 <?php
+// protect page
+include '../includes/auth.php';
+
 // connect to database
 include '../config/db.php';
 
@@ -25,13 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($room_name) || empty($room_type) || empty($status)) {
         $message = "All fields are required.";
 
-    // check meeting capacity
     } elseif ($room_type == "meeting" && ($capacity < 2 || $capacity > 15)) {
         $message = "Meeting room capacity must be between 2 and 15.";
 
     } else {
 
-        // insert into database
+        // insert room into database
         $stmt = $conn->prepare("INSERT INTO rooms (room_name, room_type, capacity, status) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssis", $room_name, $room_type, $capacity, $status);
 
@@ -61,7 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <option value="individual">Individual</option>
     </select><br><br>
 
-    <!-- capacity only for meeting -->
     <div id="capacity_field">
         Capacity:
         <select name="capacity">
@@ -72,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     Status:
-    <select name="status">
+    <select name="status" required>
         <option value="available">Available</option>
         <option value="unavailable">Unavailable</option>
     </select><br><br>
@@ -80,6 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit">Add Room</button>
 
 </form>
+
+<br>
+<a href="rooms.php">Back to Rooms</a>
 
 <script>
 // show or hide capacity field
@@ -94,5 +98,6 @@ function toggleCapacity() {
     }
 }
 
+// run when page loads
 toggleCapacity();
 </script>
