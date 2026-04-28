@@ -40,15 +40,10 @@ if (!isset($_SESSION['user_id'])) {
 
     <?php if ($_SESSION['role'] == 'admin') { ?>
         <li><a href="admin/manage_users.php">Manage Users</a></li>
+        <li><a href="admin/manage_bookings.php">Manage Bookings</a></li>
     <?php } ?>
 
     <li><a href="auth/logout.php">Logout</a></li>
-
-    <?php if ($_SESSION['role'] == 'admin') { ?>
-    <li><a href="admin/manage_users.php">Manage Users</a></li>
-    <li><a href="admin/manage_bookings.php">Manage Bookings</a></li>
-<?php } ?>
-
 </ul>
 
 </body>

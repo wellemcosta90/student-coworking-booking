@@ -66,10 +66,12 @@ $result = $conn->query("
             <td><?php echo htmlspecialchars($booking['booking_purpose']); ?></td>
             <td><?php echo htmlspecialchars($booking['status']); ?></td>
             <td>
-                <?php if ($booking['status'] == 'booked') { ?>
-                    <a href="edit_booking.php?id=<?php echo $booking['booking_id']; ?>">Edit</a>
-                <?php } ?>
-            </td>
+    <?php if ($booking['status'] == 'booked') { ?>
+        <a href="edit_booking.php?id=<?php echo $booking['booking_id']; ?>">Edit</a>
+        |
+        <a href="cancel_booking.php?id=<?php echo $booking['booking_id']; ?>">Cancel</a>
+    <?php } ?>
+</td>
         </tr>
     <?php } ?>
 
