@@ -19,13 +19,13 @@ include '../includes/auth.php';
 
     <h2>Individual Room</h2>
     <p>Capacity: 1 person</p>
-    <a href="select_room.php?type=individual">Choose Individual Room</a>
+    <a href="../bookings/book_room.php?type=individual">Book Individual Room</a>
 
     <br><br>
 
     <h2>Meeting Room</h2>
     <p>Capacity: 2 to 15 people</p>
-    <a href="select_room.php?type=meeting">Choose Meeting Room</a>
+    <a href="../bookings/book_room.php?type=meeting">Book Meeting Room</a>
 
     <br><br><br>
 
