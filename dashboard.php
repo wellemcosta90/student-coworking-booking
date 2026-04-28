@@ -31,15 +31,25 @@ if (!isset($_SESSION['user_id'])) {
     <h2>What would you like to do?</h2>
 
     <ul>
-        <li><a href="rooms/rooms.php">Choose a Room</a></li>
-        <li><a href="bookings/my_bookings.php">My Bookings</a></li>
+    <li><a href="rooms/rooms.php">Choose a Room</a></li>
+    <li><a href="bookings/my_bookings.php">My Bookings</a></li>
 
-        <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'organiser') { ?>
-            <li><a href="rooms/add_room.php">Add New Room</a></li>
-        <?php } ?>
+    <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'organiser') { ?>
+        <li><a href="rooms/add_room.php">Add New Room</a></li>
+    <?php } ?>
 
-        <li><a href="auth/logout.php">Logout</a></li>
-    </ul>
+    <?php if ($_SESSION['role'] == 'admin') { ?>
+        <li><a href="admin/manage_users.php">Manage Users</a></li>
+    <?php } ?>
+
+    <li><a href="auth/logout.php">Logout</a></li>
+
+    <?php if ($_SESSION['role'] == 'admin') { ?>
+    <li><a href="admin/manage_users.php">Manage Users</a></li>
+    <li><a href="admin/manage_bookings.php">Manage Bookings</a></li>
+<?php } ?>
+
+</ul>
 
 </body>
 </html>
