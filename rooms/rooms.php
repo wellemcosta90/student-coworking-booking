@@ -1,41 +1,35 @@
 <?php
 // protect page
 include '../includes/auth.php';
-
-// connect database
-include '../config/db.php';
-
-// get rooms from database
-$result = $conn->query("SELECT * FROM rooms");
 ?>
 
-<h2>Rooms</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Room Type</title>
+</head>
+<body>
 
-<a href="add_room.php">Add Room</a>
-<br><br>
+    <h1>Choose a Room Type</h1>
 
-<table border="1" cellpadding="10">
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Capacity</th>
-        <th>Status</th>
-        <th>Actions</th>
-    </tr>
+    <p>Select the type of room you want to book.</p>
 
-    <?php while ($room = $result->fetch_assoc()) { ?>
-        <tr>
-            <td><?php echo htmlspecialchars($room['room_name']); ?></td>
-            <td><?php echo htmlspecialchars($room['room_type']); ?></td>
-            <td><?php echo htmlspecialchars($room['capacity']); ?></td>
-            <td><?php echo htmlspecialchars($room['status']); ?></td>
-            <td>
-                <a href="edit_room.php?id=<?php echo $room['room_id']; ?>">Edit</a> |
-                <a href="delete_room.php?id=<?php echo $room['room_id']; ?>">Delete</a> |
-                <a href="../bookings/book_room.php?id=<?php echo $room['room_id']; ?>">Book Now</a>
-            </td>
-        </tr>
-    <?php } ?>
-</table>
+    <hr>
 
-<br>
+    <h2>Individual Room</h2>
+    <p>Capacity: 1 person</p>
+    <a href="select_room.php?type=individual">Choose Individual Room</a>
+
+    <br><br>
+
+    <h2>Meeting Room</h2>
+    <p>Capacity: 2 to 15 people</p>
+    <a href="select_room.php?type=meeting">Choose Meeting Room</a>
+
+    <br><br><br>
+
+    <a href="../dashboard.php">Back to Dashboard</a>
+
+</body>
+</html>

@@ -9,15 +9,35 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 
-<h2>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>!</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
 
-<p>Your role is: <?php echo htmlspecialchars($_SESSION['role']); ?></p>
+    <h1>Dashboard</h1>
 
-<hr>
+    <p>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>.</p>
 
-<h3>Menu</h3>
+    <hr>
 
-<a href="rooms/rooms.php">View Rooms</a><br>
-<a href="rooms/add_room.php">Add Room</a><br>
-<a href="bookings/my_bookings.php">My Bookings</a><br>
-<a href="auth/logout.php">Logout</a>
+    <h2>What would you like to do?</h2>
+
+    <ul>
+        <li>
+            <a href="rooms/rooms.php">Choose a Room</a>
+        </li>
+
+        <li>
+            <a href="bookings/my_bookings.php">My Bookings</a>
+        </li>
+
+        <li>
+            <a href="auth/logout.php">Logout</a>
+        </li>
+    </ul>
+
+</body>
+</html>
