@@ -6,6 +6,11 @@ include '../includes/header.php';
 // connect to database
 include '../config/db.php';
 
+// only admin or organiser can delete rooms
+if ($_SESSION['role'] != 'admin' && $_SESSION['role'] != 'organiser') {
+    die("Access denied. Only admins or organisers can delete rooms.");
+}
+
 // check if id exists
 if (!isset($_GET['id'])) {
     die("Room ID not found.");

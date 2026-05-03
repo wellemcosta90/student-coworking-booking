@@ -20,7 +20,7 @@ $result = $conn->query("SELECT user_id, name, email, role, created_at FROM users
 <head>
     <meta charset="UTF-8">
     <title>Manage Users</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 <div class="container">

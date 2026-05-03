@@ -11,6 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- ✅ CORRECT PATH -->
     <link rel="stylesheet" href="/student-coworking-booking/assets/css/style.css">
+    <script src="/student-coworking-booking/assets/js/intro.js" defer></script>
 </head>
 <body>
 

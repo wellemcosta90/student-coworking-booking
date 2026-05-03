@@ -6,6 +6,11 @@ include '../includes/header.php';
 // connect to database
 include '../config/db.php';
 
+// only admin or organiser can edit rooms
+if ($_SESSION['role'] != 'admin' && $_SESSION['role'] != 'organiser') {
+    die("Access denied. Only admins or organisers can edit rooms.");
+}
+
 // variable to show messages
 $message = "";
 

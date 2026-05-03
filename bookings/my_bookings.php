@@ -28,7 +28,7 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>My Bookings</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 <div class="container">

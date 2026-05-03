@@ -36,7 +36,7 @@ include 'includes/header.php';
     <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'organiser') { ?>
     <div class="card">
         <h3>Add Room</h3>
-        <a href="rooms/add_rooms.php">Add Room</a>
+        <a href="rooms/add_room.php">Add Room</a>
     </div>
     <?php } ?>
 
