@@ -1,51 +1,38 @@
 <?php
-// start session to keep user logged in
 session_start();
-
-// connect to database
 include '../config/db.php';
 
-// variable to show messages to the user
 $message = "";
 
-// check if form was submitted
+// LOGIN LOGIC
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // get user input and remove extra spaces
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // check if fields are empty
     if (empty($email) || empty($password)) {
         $message = "Email and password are required.";
 
-    // check if email format is valid
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = "Invalid email format.";
 
     } else {
 
-        // prepare SQL to find user by email
         $stmt = $conn->prepare("SELECT user_id, name, email, password, role FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
-
-        // get result from database
         $result = $stmt->get_result();
 
-        // check if user exists
         if ($result->num_rows === 1) {
+
             $user = $result->fetch_assoc();
 
-            // verify password with hashed password
             if (password_verify($password, $user['password'])) {
 
-                // save user info in session
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['role'] = $user['role'];
 
-                // redirect to dashboard
                 header("Location: ../dashboard.php");
                 exit();
 
@@ -58,23 +45,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+// HEADER (loads CSS)
+include '../includes/header.php';
 ?>
 
-<h2>Login</h2>
+<div class="auth-container">
 
-<?php if (!empty($message)) { ?>
-    <p><?php echo htmlspecialchars($message); ?></p>
-<?php } ?>
+    <h2>Login</h2>
 
-<form method="POST">
-    Email:
-    <input type="email" name="email" required><br><br>
+    <?php if (!empty($message)) { ?>
+        <p class="message"><?php echo htmlspecialchars($message); ?></p>
+    <?php } ?>
 
-    Password:
-    <input type="password" name="password" required><br><br>
+    <form method="POST">
 
-    <button type="submit">Login</button>
-</form>
+        <div class="input-group">
+            <i class="fa fa-envelope"></i>
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
 
-<br>
-<a href="register.php">Create account</a>
+        <div class="input-group">
+            <i class="fa fa-lock"></i>
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <a href="register.php">Create account</a>
+
+</div>

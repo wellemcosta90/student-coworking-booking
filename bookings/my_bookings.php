@@ -1,6 +1,7 @@
 <?php
 // protect page
 include '../includes/auth.php';
+include '../includes/header.php';
 
 // connect database
 include '../config/db.php';
@@ -27,8 +28,10 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>My Bookings</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="container">
 
 <h1>My Bookings</h1>
 
@@ -80,5 +83,6 @@ $result = $stmt->get_result();
 <br>
 <a href="../dashboard.php">Back to Dashboard</a>
 
+</div>
 </body>
 </html>

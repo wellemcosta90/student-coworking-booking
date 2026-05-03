@@ -1,6 +1,7 @@
 <?php
 // protect page
 include '../includes/auth.php';
+include '../includes/header.php';
 
 // only admin can access
 if ($_SESSION['role'] != 'admin') {

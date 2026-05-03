@@ -2,49 +2,56 @@
 // start session
 session_start();
 
-// check if user is logged in
+// check login
 if (!isset($_SESSION['user_id'])) {
     header("Location: auth/login.php");
     exit();
 }
+
+// include header (THIS LOADS CSS)
+include 'includes/header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-</head>
-<body>
+<h1>Dashboard</h1>
 
-    <h1>Dashboard</h1>
+<p>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>.</p>
+<p>You are logged in as: <?php echo ucfirst($_SESSION['role']); ?></p>
 
-    <p>Welcome, <?php echo htmlspecialchars($_SESSION['name']); ?>.</p>
+<hr>
 
-    <p>
-        You are currently logged in as:
-        <?php echo htmlspecialchars(ucfirst($_SESSION['role'])); ?>
-    </p>
+<div class="card-grid">
 
-    <hr>
+    <div class="card">
+        <h3>Browse Rooms</h3>
+        <p>Find available rooms</p>
+        <a href="rooms/rooms.php">View Rooms</a>
+    </div>
 
-    <h2>What would you like to do?</h2>
-
-    <ul>
-    <li><a href="rooms/rooms.php">Choose a Room</a></li>
-    <li><a href="bookings/my_bookings.php">My Bookings</a></li>
+    <div class="card">
+        <h3>My Bookings</h3>
+        <p>View your bookings</p>
+        <a href="bookings/my_bookings.php">View Bookings</a>
+    </div>
 
     <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'organiser') { ?>
-        <li><a href="rooms/add_room.php">Add New Room</a></li>
+    <div class="card">
+        <h3>Add Room</h3>
+        <a href="rooms/add_rooms.php">Add Room</a>
+    </div>
     <?php } ?>
 
     <?php if ($_SESSION['role'] == 'admin') { ?>
-        <li><a href="admin/manage_users.php">Manage Users</a></li>
-        <li><a href="admin/manage_bookings.php">Manage Bookings</a></li>
+    <div class="card">
+        <h3>Manage Users</h3>
+        <a href="admin/manage_users.php">Users</a>
+    </div>
+
+    <div class="card">
+        <h3>Manage Bookings</h3>
+        <a href="admin/manage_bookings.php">Bookings</a>
+    </div>
     <?php } ?>
 
-    <li><a href="auth/logout.php">Logout</a></li>
-</ul>
+</div>
 
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

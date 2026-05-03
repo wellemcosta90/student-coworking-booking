@@ -1,6 +1,7 @@
 <?php
 // protect page
 include '../includes/auth.php';
+include '../includes/header.php';
 
 // only admin can access this page
 if ($_SESSION['role'] != 'admin') {
@@ -63,8 +64,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Edit User Role</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="container">
 
 <h1>Edit User Role</h1>
 
@@ -91,5 +94,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <br>
 <a href="manage_users.php">Back to Manage Users</a>
 
+</div>
 </body>
 </html>

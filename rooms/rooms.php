@@ -1,35 +1,29 @@
 <?php
-// protect page
-include '../includes/auth.php';
+include '../includes/header.php';
+include '../config/db.php';
+
+$result = $conn->query("SELECT * FROM rooms");
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Choose Room Type</title>
-</head>
-<body>
+<h1>Available Rooms</h1>
 
-    <h1>Choose a Room Type</h1>
+<?php while ($room = $result->fetch_assoc()) { ?>
 
-    <p>Select the type of room you want to book.</p>
+<div class="room-card">
+    <h3><?php echo htmlspecialchars($room['room_name']); ?></h3>
 
-    <hr>
+    <p><strong>Type:</strong> <?php echo ucfirst($room['room_type']); ?></p>
+    <p><strong>Capacity:</strong> <?php echo $room['capacity']; ?></p>
+    <p><strong>Status:</strong> <?php echo $room['status']; ?></p>
 
-    <h2>Individual Room</h2>
-    <p>Capacity: 1 person</p>
-    <a href="../bookings/book_room.php?type=individual">Book Individual Room</a>
+    <?php if ($room['status'] == 'available') { ?>
+        <a href="../bookings/book_room.php?type=<?php echo $room['room_type']; ?>">
+            Book Now
+        </a>
+    <?php } ?>
 
-    <br><br>
+</div>
 
-    <h2>Meeting Room</h2>
-    <p>Capacity: 2 to 15 people</p>
-    <a href="../bookings/book_room.php?type=meeting">Book Meeting Room</a>
+<?php } ?>
 
-    <br><br><br>
-
-    <a href="../dashboard.php">Back to Dashboard</a>
-
-</body>
-</html>
+<?php include '../includes/footer.php'; ?>

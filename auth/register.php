@@ -1,20 +1,16 @@
 <?php
-// connect to database
 include '../config/db.php';
 
-// message variable
 $message = "";
 
-// check if form was submitted
+// REGISTER LOGIC
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // get form data
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
     $role = "attendee";
 
-    // validation
     if (empty($name) || empty($email) || empty($password)) {
         $message = "All fields are required.";
 
@@ -26,10 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
 
-        // hash password before saving
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // insert user into database
         $stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $name, $email, $hashed_password, $role);
 
@@ -44,26 +38,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+// HEADER
+include '../includes/header.php';
 ?>
 
-<h2>Register</h2>
+<div class="auth-container">
 
-<?php if (!empty($message)) { ?>
-    <p><?php echo htmlspecialchars($message); ?></p>
-<?php } ?>
+    <h2>Create Account</h2>
 
-<form method="POST">
-    Name:
-    <input type="text" name="name" required><br><br>
+    <?php if (!empty($message)) { ?>
+        <p class="message"><?php echo htmlspecialchars($message); ?></p>
+    <?php } ?>
 
-    Email:
-    <input type="email" name="email" required><br><br>
+    <form method="POST">
 
-    Password:
-    <input type="password" name="password" required><br><br>
+        <div class="input-group">
+            <i class="fa fa-user"></i>
+            <input type="text" name="name" placeholder="Full Name" required>
+        </div>
 
-    <button type="submit">Register</button>
-</form>
+        <div class="input-group">
+            <i class="fa fa-envelope"></i>
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
 
-<br>
-<a href="login.php">Already have an account? Login</a>
+        <div class="input-group">
+            <i class="fa fa-lock"></i>
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <a href="login.php">Already have an account?</a>
+
+</div>

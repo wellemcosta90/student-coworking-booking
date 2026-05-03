@@ -1,6 +1,7 @@
 <?php
 // protect page
 include '../includes/auth.php';
+include '../includes/header.php';
 
 // only admin or organiser can add rooms
 if ($_SESSION['role'] != 'admin' && $_SESSION['role'] != 'organiser') {
@@ -58,8 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Add New Room</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="container">
 
     <h1>Add New Room</h1>
 
@@ -121,5 +124,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     toggleCapacity();
     </script>
 
+</div>
 </body>
 </html>

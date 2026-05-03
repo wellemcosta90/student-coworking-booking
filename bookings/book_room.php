@@ -1,6 +1,7 @@
 <?php
 // protect page
 include '../includes/auth.php';
+include '../includes/header.php';
 
 // connect to database
 include '../config/db.php';
@@ -126,8 +127,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Book Room</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="container">
 
     <h1>Book <?php echo htmlspecialchars(ucfirst($room_type)); ?> Room</h1>
 
@@ -216,5 +219,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <br><br>
     <a href="../dashboard.php">Back to Dashboard</a>
 
+</div>
 </body>
 </html>

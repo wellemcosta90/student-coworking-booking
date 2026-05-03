@@ -1,6 +1,7 @@
 <?php
 // protect page
 include '../includes/auth.php';
+include '../includes/header.php';
 
 // only admin can access this page
 if ($_SESSION['role'] != 'admin') {
@@ -120,8 +121,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Edit Booking</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
 
 <h1>Edit Booking</h1>
 
@@ -177,5 +180,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <br>
 <a href="manage_bookings.php">Back to Manage Bookings</a>
 
+</div>
 </body>
 </html>

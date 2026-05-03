@@ -1,6 +1,7 @@
 <?php
 // protect page
 include '../includes/auth.php';
+include '../includes/header.php';
 
 // connect database
 include '../config/db.php';
@@ -110,8 +111,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Edit Booking</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="container">
 
 <h1>Edit Booking</h1>
 
@@ -163,5 +166,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <br>
 <a href="my_bookings.php">Back to My Bookings</a>
 
+</div>
 </body>
 </html>

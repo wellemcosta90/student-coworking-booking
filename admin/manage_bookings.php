@@ -1,6 +1,7 @@
 <?php
 // protect page
 include '../includes/auth.php';
+include '../includes/header.php';
 
 // only admin can access this page
 if ($_SESSION['role'] != 'admin') {
@@ -34,8 +35,10 @@ $result = $conn->query("
 <head>
     <meta charset="UTF-8">
     <title>Manage Bookings</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="container">
 
 <h1>Manage Bookings</h1>
 
@@ -86,5 +89,6 @@ $result = $conn->query("
 <br>
 <a href="../dashboard.php">Back to Dashboard</a>
 
+</div>
 </body>
 </html>

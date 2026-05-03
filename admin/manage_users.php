@@ -1,6 +1,7 @@
 <?php
 // protect page
 include '../includes/auth.php';
+include '../includes/header.php';
 
 // only admin can access this page
 if ($_SESSION['role'] != 'admin') {
@@ -19,8 +20,10 @@ $result = $conn->query("SELECT user_id, name, email, role, created_at FROM users
 <head>
     <meta charset="UTF-8">
     <title>Manage Users</title>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="container">
 
 <h1>Manage Users</h1>
 
@@ -52,5 +55,6 @@ $result = $conn->query("SELECT user_id, name, email, role, created_at FROM users
 <br>
 <a href="../dashboard.php">Back to Dashboard</a>
 
+</div>
 </body>
 </html>
